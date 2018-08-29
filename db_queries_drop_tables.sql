@@ -1,0 +1,5 @@
+DROP TABLE IF EXISTS `houses`;
+DROP TABLE IF EXISTS `streets`;
+DROP TABLE IF EXISTS `cities`;
+DROP TABLE IF EXISTS `countries`;
+DROP TABLE IF EXISTS `street_types`;
