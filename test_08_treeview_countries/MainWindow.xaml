@@ -3,10 +3,44 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:selfModels="clr-namespace:test_08_treeview_countries.Models"
         xmlns:local="clr-namespace:test_08_treeview_countries"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="650">
+
+    <!--<Window.DataContext>
+        <local:MainViewModel/>
+    </Window.DataContext>-->
+
     <Grid>
-        
+        <!--TreeViewItem.Expanded="treeView1_Expanded"-->
+        <TreeView x:Name="treeView1" ItemsSource="{Binding Countries}"
+                  HorizontalAlignment="Left" Height="200" Margin="5,5,0,0" VerticalAlignment="Top" Width="450">
+            
+            <TreeView.Resources>
+                
+                <Style TargetType="TreeViewItem">
+                    <Setter Property="local:Behaviours.ExpandingBehaviour" Value="{Binding ExpandingCommand}"/>
+                </Style>
+
+                <HierarchicalDataTemplate DataType="{x:Type selfModels:Country}" ItemsSource="{Binding CITIES}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding NAME}"></TextBlock>
+                    </StackPanel>
+                </HierarchicalDataTemplate>
+                
+            </TreeView.Resources>
+
+                
+            
+
+            <!--<HierarchicalDataTemplate ItemsSource="{Binding STREETS}" DataType="{x:Type selfModels:City}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding NAME}" />
+                    </StackPanel>
+                </HierarchicalDataTemplate>-->
+
+
+        </TreeView>
     </Grid>
 </Window>
