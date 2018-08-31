@@ -36,7 +36,7 @@ namespace test_08_treeview_countries.Models
 
         public static Street GenerateNewRandomStreet()
         {
-            List<StreetType> listOfStreetTypes = DBQueries.SelectAllStreetTypes();
+            List<StreetType> listOfStreetTypes = DB_Countries_Queries.SelectAllStreetTypes();
 
             Random rand = new Random();
             string genStreetName = listStreetNames[rand.Next(listStreetNames.Count)];

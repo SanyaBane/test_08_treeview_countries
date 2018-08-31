@@ -81,7 +81,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Database\DBConnect.cs" />
-    <Compile Include="Database\DBQueries.cs" />
+    <Compile Include="Database\DB_Countries_Queries.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="MainViewModel.cs" />
     <Compile Include="MainWindow.xaml.cs">

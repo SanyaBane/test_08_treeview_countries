@@ -28,7 +28,7 @@ namespace test_08_treeview_countries
 
             // -------------
 
-            Countries = new ObservableCollection<Country>(DBQueries.SelectAllCountries());
+            Countries = new ObservableCollection<Country>(DB_Countries_Queries.SelectAllCountries());
             Countries_tvitem = new ObservableCollection<CountryTreeViewItem>();
 
             foreach (var country in Countries)
