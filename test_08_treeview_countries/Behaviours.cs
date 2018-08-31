@@ -28,23 +28,27 @@ namespace test_08_treeview_countries
 
         private static void OnExpandingBehaviourChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            TreeViewItem tvi = d as TreeViewItem;
-            if (tvi != null)
-            {
-                ICommand ic = e.NewValue as ICommand;
-                if (ic != null)
-                {
-                    tvi.Expanded += (s, a) =>
-                    {
-                        if (ic.CanExecute(a))
-                        {
-                            ic.Execute(a);
-                        }
+            TreeViewItem treeViewItem = d as TreeViewItem;
 
-                        a.Handled = true;
-                    };
+            if (treeViewItem == null)
+                return;
+
+            ICommand iCommand = e.NewValue as ICommand;
+
+            if (iCommand == null)
+                return;
+
+            treeViewItem.Expanded += (obj, rouEvArgs) =>
+            {
+                if (iCommand.CanExecute(rouEvArgs))
+                {
+                    iCommand.Execute(rouEvArgs);
                 }
-            }
+
+                rouEvArgs.Handled = true;
+            };
+
+
         }
         #endregion
     }

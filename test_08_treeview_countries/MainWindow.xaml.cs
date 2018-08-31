@@ -29,44 +29,62 @@ namespace test_08_treeview_countries
             DataContext = new MainViewModel();
         }
 
-        //private void treeView1_Expanded(object sender, RoutedEventArgs e)
-        //{
-        //    Console.WriteLine("treeView1_Expanded");
+        private void treeView1_Expanded(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine("treeView1_Expanded from tree view event");
 
-        //    TreeViewItem item = e.OriginalSource as TreeViewItem;
-        //    if (item == null)
-        //        return;
+            //TreeViewItem item = e.OriginalSource as TreeViewItem;
+            //TreeView tv = (TreeView)item.Parent;
 
-        //    var context = item.DataContext;
-
-        //    if(context is Country)
-        //    {
-        //        Country country = context as Country;
-
-        //        if(country.CITIES.Count == 1)
-        //        {
-        //            City ct = country.CITIES[0];
-
-        //            if(ct.ID == 0)
-        //            {
-        //                country.CITIES.Clear();
-        //            }
-        //            else
-        //            {
-        //                return;
-        //            }
-        //        }
-
-        //        //country.CITIES = SelectAllCitiesByCountryID(country.ID);
-
-        //    }
-        //    else if (context is City)
-        //    {
-        //        City city = context as City;
+            TreeView tv = e.Source as TreeView;
 
 
-        //    }
+            #region comment_01
+            /*
+            TreeViewItem item = e.OriginalSource as TreeViewItem;
+            if (item == null)
+                return;
+            var context = item.DataContext;
+            if (context is Country)
+            {
+                Country country = context as Country;
+                if (country.CITIES.Count == 1)
+                {
+                    City ct = country.CITIES[0];
+                    if (ct.ID == 0)
+                    {
+                        country.CITIES.Clear();
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+                //country.CITIES = SelectAllCitiesByCountryID(country.ID);
+            }
+            else if (context is City)
+            {
+                City city = context as City;
+            }
+            */
+            #endregion
 
-        //}
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine(treeView1);
+            var mainViewModel = DataContext as MainViewModel;
+
+            Country newCountry = new Country();
+            newCountry.NAME = "SOLO";
+
+            CountryTreeViewItem ctvi = new CountryTreeViewItem();
+            ctvi.Country = newCountry;
+
+            mainViewModel.Countries_tvitem.Add(ctvi);
+            mainViewModel.Countries.Add(newCountry);
+        }
     }
 }

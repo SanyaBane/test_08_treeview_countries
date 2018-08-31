@@ -26,7 +26,7 @@ namespace test_08_treeview_countries
             }
         }
 
-        public List<Street> ListOfStreets;
+        //public List<Street> ListOfStreets;
 
         private void Init()
         {
@@ -40,17 +40,5 @@ namespace test_08_treeview_countries
             //    ListOfStreets.Add(Street.GenerateNewRandomStreet());
             //}
         }
-
-        //public static bool PopulateCountries(IList<Country> countries)
-        //{
-        //    List<Country> countriesList = DBQueries.SelectAllCountries();
-
-        //    foreach(var country in countriesList)
-        //    {
-        //        country.CITIES.Add(new City());
-        //    }
-
-        //    return true;
-        //}
     }
 }

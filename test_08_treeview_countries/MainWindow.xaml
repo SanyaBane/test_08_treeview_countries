@@ -4,43 +4,81 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:selfModels="clr-namespace:test_08_treeview_countries.Models"
-        xmlns:local="clr-namespace:test_08_treeview_countries"
+        xmlns:test_08_treeview_countries="clr-namespace:test_08_treeview_countries"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="650">
 
-    <!--<Window.DataContext>
-        <local:MainViewModel/>
-    </Window.DataContext>-->
-
     <Grid>
         <!--TreeViewItem.Expanded="treeView1_Expanded"-->
-        <TreeView x:Name="treeView1" ItemsSource="{Binding Countries}"
+        <!--ItemsSource="{Binding Countries}"-->
+
+        <!--<TreeView x:Name="treeView1" ItemsSource="{Binding Countries}"
+                  HorizontalAlignment="Left" Height="200" Margin="5,5,0,0" VerticalAlignment="Top" Width="450">-->
+
+        <TreeView x:Name="treeView1" 
+                  ItemsSource="{Binding Countries}" 
                   HorizontalAlignment="Left" Height="200" Margin="5,5,0,0" VerticalAlignment="Top" Width="450">
-            
+
             <TreeView.Resources>
-                
+
+                <!--<Style TargetType="selfModels:CountryTreeViewItem">
+                    <Setter Property="test_08_treeview_countries:Behaviours.ExpandingBehaviour" Value="{Binding ExpandingCommand}"/>
+                </Style>-->
+
                 <Style TargetType="TreeViewItem">
-                    <Setter Property="local:Behaviours.ExpandingBehaviour" Value="{Binding ExpandingCommand}"/>
+                    <Setter Property="test_08_treeview_countries:Behaviours.ExpandingBehaviour" Value="{Binding ExpandingCommand}"/>
                 </Style>
 
-                <HierarchicalDataTemplate DataType="{x:Type selfModels:Country}" ItemsSource="{Binding CITIES}">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding NAME}"></TextBlock>
-                    </StackPanel>
+                <HierarchicalDataTemplate DataType="{x:Type selfModels:Country}"
+                                          ItemsSource="{Binding CITIES}"
+                                          >
+
+                    <TextBlock Text="{Binding NAME}"/>
                 </HierarchicalDataTemplate>
-                
+
             </TreeView.Resources>
 
-                
-            
+            <!--<HierarchicalDataTemplate DataType="{x:Type selfModels:Country}" ItemsSource="{Binding CITIES}">-->
 
-            <!--<HierarchicalDataTemplate ItemsSource="{Binding STREETS}" DataType="{x:Type selfModels:City}">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding NAME}" />
-                    </StackPanel>
-                </HierarchicalDataTemplate>-->
+            <!--<TreeView.ItemTemplate>
+                <HierarchicalDataTemplate DataType="{x:Type selfModels:Country}"
+                                          ItemsSource="{Binding CITIES}"
+                                          >
 
+
+                    <TextBlock Text="{Binding NAME}"/>
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>-->
+
+
+
+
+            <!--<DataTemplate DataType="{x:Type selfModels:City}"
+                                          >
+                    <TreeViewItem/>
+                </DataTemplate>-->
+
+
+            <!--<TreeViewItem Header="this" >
+                <TreeViewItem Header="1"/>
+                <TreeViewItem Header="2">
+                    <TreeViewItem Header="Nested"></TreeViewItem>
+                </TreeViewItem>
+                <TreeViewItem Header="2"/>
+                <TreeViewItem Header="2"/>
+                <TreeViewItem Header="2"/>
+            </TreeViewItem>
+            <TreeViewItem Header="that" >
+                <TreeViewItem Header="1"/>
+                <TreeViewItem Header="2"/>
+                <TreeViewItem Header="2"/>
+                <TreeViewItem Header="2"/>
+                <TreeViewItem Header="2"/>
+            </TreeViewItem>-->
 
         </TreeView>
+        
+        <Button Content="Button" HorizontalAlignment="Left" Margin="201,254,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        
     </Grid>
 </Window>

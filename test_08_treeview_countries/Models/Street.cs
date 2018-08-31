@@ -16,12 +16,17 @@ namespace test_08_treeview_countries.Models
         public List<House> HOUSES { get; set; }
         public StreetType STREET_TYPE { get; set; }
 
-        public Street(int id, string name, StreetType streetType)
+        public Street()
+        {
+            HOUSES = new List<House>();
+        }
+
+        public Street(int id, string name, StreetType streetType) : this()
         {
             ID = id;
             NAME = name;
             STREET_TYPE = streetType;
-            HOUSES = new List<House>();
+
         }
 
         static Street()
