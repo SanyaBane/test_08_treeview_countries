@@ -26,7 +26,7 @@ namespace test_08_treeview_countries.Models
         {
             ID = id;
             NAME = name;
-            SHORT_NAME = short_name;
+            SHORT_NAME = '[' + short_name + ']';
         }
 
     }

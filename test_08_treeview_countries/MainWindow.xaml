@@ -21,19 +21,24 @@
 
             <TreeView.Resources>
 
-                <!--<Style TargetType="selfModels:CountryTreeViewItem">
+                <!--<Style TargetType="TreeViewItem">
                     <Setter Property="test_08_treeview_countries:Behaviours.ExpandingBehaviour" Value="{Binding ExpandingCommand}"/>
                 </Style>-->
 
-                <Style TargetType="TreeViewItem">
-                    <Setter Property="test_08_treeview_countries:Behaviours.ExpandingBehaviour" Value="{Binding ExpandingCommand}"/>
-                </Style>
-
                 <HierarchicalDataTemplate DataType="{x:Type selfModels:Country}"
-                                          ItemsSource="{Binding CITIES}"
-                                          >
+                                          ItemsSource="{Binding CITIES}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding SHORT_NAME}"/>
+                        <TextBlock Margin="5 0 0 0" Text="{Binding NAME}"/>
+                    </StackPanel>
+                </HierarchicalDataTemplate>
 
-                    <TextBlock Text="{Binding NAME}"/>
+                <HierarchicalDataTemplate DataType="{x:Type selfModels:City}"
+                                          ItemsSource="{Binding Streets}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding NAME}"/>
+                        <TextBlock Margin="5 0 0 0" Text="{Binding AMOUNT_OF_PEOPLES}"/>
+                    </StackPanel>
                 </HierarchicalDataTemplate>
 
             </TreeView.Resources>
