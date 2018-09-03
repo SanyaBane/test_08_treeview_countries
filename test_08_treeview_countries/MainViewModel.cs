@@ -18,13 +18,21 @@ namespace test_08_treeview_countries
         public ObservableCollection<Country> Countries { get; set; }
         public ObservableCollection<CountryTreeViewItem> Countries_tvitem { get; set; }
 
-        public ICommand ExpandingCommand { get; set; }
+        public Action<object, RoutedEventArgs> OnExpandedActionInViewModel
+        {
+            get { return _onExpandedActionInViewModel; }
+            private set
+            {
+                _onExpandedActionInViewModel = value;
+                OnPropertyChanged();
+            }
+        }
 
         public MainViewModel()
         {
             Console.WriteLine("MainViewModel()");
 
-            ExpandingCommand = new RelayCommand(ExecuteExpandingCommand, CanExecuteExpandingCommand);
+            OnExpandedActionInViewModel = new Action<object, RoutedEventArgs>(OnExpanded);
 
             // -------------
 
@@ -49,18 +57,7 @@ namespace test_08_treeview_countries
             //var newStreet = Street.GenerateNewRandomStreet();
         }
 
-        private void ExecuteExpandingCommand(object obj)
-        {
-            //    RoutedEventArgs rea = (RoutedEventArgs)obj;
-            //    TreeViewItem tvi = (TreeViewItem)rea.OriginalSource;
-            //    TreeView tv = (TreeView)tvi.Parent;
-            Console.WriteLine("Expanded.");
-        }
-
-        private bool CanExecuteExpandingCommand(object obj)
-        {
-            return true;
-        }
+        
 
         #region INotifyPropertyChanged Implementation
         public event PropertyChangedEventHandler PropertyChanged;
