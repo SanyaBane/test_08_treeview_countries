@@ -11,10 +11,12 @@ namespace test_08_treeview_countries.Models
     {
         private static int idCounter = 1;
 
+        private static List<string> listStreetNames;
+
         public int ID { get; set; }
         public string NAME { get; set; }
-        public List<House> HOUSES { get; set; }
         public StreetType STREET_TYPE { get; set; }
+        public List<House> HOUSES { get; set; }
 
         public Street()
         {
@@ -26,7 +28,6 @@ namespace test_08_treeview_countries.Models
             ID = id;
             NAME = name;
             STREET_TYPE = streetType;
-
         }
 
         static Street()
@@ -34,19 +35,18 @@ namespace test_08_treeview_countries.Models
             listStreetNames = new List<string>(streetNames.Trim().Split('\n'));
         }
 
-        public static Street GenerateNewRandomStreet()
+        public static Street GenerateNewRandomStreet(Random rand)
         {
-            List<StreetType> listOfStreetTypes = DB_Countries_Queries.SelectAllStreetTypes();
+            //List<StreetType> listOfStreetTypes = Helper.Instance.ListOfAllStreetTypes;
 
-            Random rand = new Random();
-            string genStreetName = listStreetNames[rand.Next(listStreetNames.Count)];
-            StreetType genStreetStreetType = listOfStreetTypes[rand.Next(listOfStreetTypes.Count)];
+            string genStreetName = listStreetNames[rand.Next(listStreetNames.Count)].Trim();
+            StreetType genStreetStreetType = Helper.Instance.ListOfAllStreetTypes[rand.Next(1, Helper.Instance.ListOfAllStreetTypes.Count)];
 
             Street generatedStreet = new Street(idCounter++, genStreetName, genStreetStreetType);
             return generatedStreet;
         }
 
-        private static List<string> listStreetNames;
+        
 
         private static string streetNames = @"
 Earl
@@ -90,5 +90,6 @@ Vale
 Terrace
 Seacoast
 ";
+
     }
 }

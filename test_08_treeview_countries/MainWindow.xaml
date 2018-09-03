@@ -4,16 +4,17 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:selfModels="clr-namespace:test_08_treeview_countries.Models"
+        xmlns:System="clr-namespace:System;assembly=mscorlib"
         xmlns:test_08_treeview_countries="clr-namespace:test_08_treeview_countries"
+        xmlns:mydb="clr-namespace:test_08_treeview_countries.Database"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="650">
 
+    <Window.Resources>
+        <test_08_treeview_countries:StreetTypeConverter x:Key="StreetTypeConverter"/>
+    </Window.Resources>
+    
     <Grid>
-        <!--TreeViewItem.Expanded="treeView1_Expanded"-->
-        <!--ItemsSource="{Binding Countries}"-->
-
-        <!--<TreeView x:Name="treeView1" ItemsSource="{Binding Countries}"
-                  HorizontalAlignment="Left" Height="200" Margin="5,5,0,0" VerticalAlignment="Top" Width="450">-->
 
         <TreeView x:Name="treeView1" 
                   ItemsSource="{Binding Countries}" 
@@ -21,66 +22,44 @@
 
             <TreeView.Resources>
 
-                <Style TargetType="TreeViewItem">
-                    <Setter Property="test_08_treeview_countries:Behaviours.ExpandingBehaviour" Value="{Binding ExpandingCommand}"/>
-                </Style>
-
                 <HierarchicalDataTemplate DataType="{x:Type selfModels:Country}"
                                           ItemsSource="{Binding CITIES}">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding SHORT_NAME}"/>
-                        <TextBlock Margin="5 0 0 0" Text="{Binding NAME}"/>
+                        <TextBlock>
+                            <Image Height="16" Width="16" Source="{Binding bitmapImage}"></Image>
+                            <Run Text="["/>
+                            <Run Text="{Binding SHORT_NAME}"/>
+                            <Run Text="] "/>
+                            <Run Text="{Binding NAME}"/>
+                        </TextBlock>
                     </StackPanel>
                 </HierarchicalDataTemplate>
 
                 <HierarchicalDataTemplate DataType="{x:Type selfModels:City}"
                                           ItemsSource="{Binding STREETS}">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding NAME}"/>
-                        <TextBlock Margin="5 0 0 0" Text="{Binding AMOUNT_OF_PEOPLES}"/>
+                        <TextBlock>
+                            <Run Text="{Binding NAME}"/>
+                            <Run Text=" - "/>
+                            <Run Text="{Binding AMOUNT_OF_PEOPLES}"/>
+                            <Run Text=" peoples."/>
+                        </TextBlock>
+                    </StackPanel>
+                </HierarchicalDataTemplate>
+
+                <HierarchicalDataTemplate DataType="{x:Type selfModels:Street}"
+                                          ItemsSource="{Binding HOUSES}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock>
+                            <Run Text="{Binding NAME}"/>
+                            <Run Text=" : "/>
+                            <Run Text="{Binding STREET_TYPE, Converter={StaticResource StreetTypeConverter}}"/>
+                        </TextBlock>
                     </StackPanel>
                 </HierarchicalDataTemplate>
 
             </TreeView.Resources>
-
-            <!--<HierarchicalDataTemplate DataType="{x:Type selfModels:Country}" ItemsSource="{Binding CITIES}">-->
-
-            <!--<TreeView.ItemTemplate>
-                <HierarchicalDataTemplate DataType="{x:Type selfModels:Country}"
-                                          ItemsSource="{Binding CITIES}"
-                                          >
-
-
-                    <TextBlock Text="{Binding NAME}"/>
-                </HierarchicalDataTemplate>
-            </TreeView.ItemTemplate>-->
-
-
-
-
-            <!--<DataTemplate DataType="{x:Type selfModels:City}"
-                                          >
-                    <TreeViewItem/>
-                </DataTemplate>-->
-
-
-            <!--<TreeViewItem Header="this" >
-                <TreeViewItem Header="1"/>
-                <TreeViewItem Header="2">
-                    <TreeViewItem Header="Nested"></TreeViewItem>
-                </TreeViewItem>
-                <TreeViewItem Header="2"/>
-                <TreeViewItem Header="2"/>
-                <TreeViewItem Header="2"/>
-            </TreeViewItem>
-            <TreeViewItem Header="that" >
-                <TreeViewItem Header="1"/>
-                <TreeViewItem Header="2"/>
-                <TreeViewItem Header="2"/>
-                <TreeViewItem Header="2"/>
-                <TreeViewItem Header="2"/>
-            </TreeViewItem>-->
-
+            
         </TreeView>
         
         <Button Content="Button" HorizontalAlignment="Left" Margin="201,254,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>

@@ -16,50 +16,36 @@ namespace test_08_treeview_countries
     class MainViewModel : INotifyPropertyChanged
     {
         public ObservableCollection<Country> Countries { get; set; }
-        public ObservableCollection<CountryTreeViewItem> Countries_tvitem { get; set; }
-
-        public ICommand ExpandingCommand { get; set; }
 
         public MainViewModel()
         {
             Console.WriteLine("MainViewModel()");
 
-            ExpandingCommand = new RelayCommand(ExecuteExpandingCommand, CanExecuteExpandingCommand);
+            Random rand = new Random();
 
             // -------------
 
             Countries = new ObservableCollection<Country>(DB_Countries_Queries.SelectAllCountries());
-            Countries_tvitem = new ObservableCollection<CountryTreeViewItem>();
 
             foreach (var country in Countries)
-            {   
-                CountryTreeViewItem ctvi = new CountryTreeViewItem();
+            {
+                List<City> citiesForCountry = DB_Countries_Queries.SelectAllCitiesByCountryID(country.ID);
 
-                City newCity = new City();
-                newCity.STREETS.Add(new Street());
+                foreach (var city in citiesForCountry)
+                {
+                    List<Street> streetsForCity = new List<Street>();
 
-                country.CITIES.Add(newCity);
+                    for (int i = 0; i < 6; i++)
+                    {
+                        Street genStreet = Street.GenerateNewRandomStreet(rand);
+                        streetsForCity.Add(genStreet);
+                    }
 
-                ctvi.Country = country;
-                Countries_tvitem.Add(ctvi);
+                    city.STREETS = streetsForCity;
+                }
+
+                country.CITIES = citiesForCountry;
             }
-
-            
-
-            //var newStreet = Street.GenerateNewRandomStreet();
-        }
-
-        private void ExecuteExpandingCommand(object obj)
-        {
-            //    RoutedEventArgs rea = (RoutedEventArgs)obj;
-            //    TreeViewItem tvi = (TreeViewItem)rea.OriginalSource;
-            //    TreeView tv = (TreeView)tvi.Parent;
-            Console.WriteLine("Expanded.");
-        }
-
-        private bool CanExecuteExpandingCommand(object obj)
-        {
-            return true;
         }
 
         #region INotifyPropertyChanged Implementation

@@ -71,7 +71,7 @@
     </ApplicationDefinition>
     <Compile Include="Behaviours.cs" />
     <Compile Include="Models\CountryTreeViewItem.cs" />
-    <Compile Include="RelayCommand.cs" />
+    <Compile Include="StreetTypeConverter.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

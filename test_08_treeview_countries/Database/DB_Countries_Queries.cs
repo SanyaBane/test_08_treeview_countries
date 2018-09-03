@@ -13,24 +13,24 @@ namespace test_08_treeview_countries.Database
     {
         public static List<Country> SelectAllCountries()
         {
-            MySqlCommand cmd = new MySqlCommand("SELECT countries.ID, countries.NAME, countries.SHORT_NAME FROM countries");
+            MySqlCommand cmd = new MySqlCommand("SELECT countries.ID, countries.NAME, countries.SHORT_NAME, countries.FLAG_IMAGE FROM countries");
 
             DataTable result = DBConnect.Instance.Select(cmd);
 
             if (result == null)
-            {
                 return null;
-            }
 
             var countriesList = new List<Country>();
 
             for (int i = 0; i < result.Rows.Count; i++)
             {
-                int countryID = Int32.Parse(result.Rows[i].ItemArray[0].ToString());
+
+                int countryID = Convert.ToInt32(result.Rows[i].ItemArray[0]);
                 string countryName = result.Rows[i].ItemArray[1].ToString();
                 string countryShortName = result.Rows[i].ItemArray[2].ToString();
+                object countryFlagImage = result.Rows[i].ItemArray[3];
 
-                var country = new Country(countryID, countryName, countryShortName);
+                var country = new Country(countryID, countryName, countryShortName, countryFlagImage);
                 countriesList.Add(country);
             }
 
@@ -39,15 +39,13 @@ namespace test_08_treeview_countries.Database
 
         public static List<City> SelectAllCitiesByCountryID(int _countryID)
         {
-            MySqlCommand cmd = new MySqlCommand("SELECT cities.ID, cities.NAME, cities.AMOUNT_OF_PEOPLE FROM cities WHERE COUNTRY_ID=@country_id");
+            MySqlCommand cmd = new MySqlCommand("SELECT cities.ID, cities.NAME, cities.AMOUNT_OF_PEOPLES FROM cities WHERE COUNTRY_ID=@country_id");
             cmd.Parameters.AddWithValue("@country_id", _countryID);
 
             DataTable result = DBConnect.Instance.Select(cmd);
 
             if (result == null)
-            {
                 return null;
-            }
 
             var citiesList = new List<City>();
 
@@ -57,7 +55,7 @@ namespace test_08_treeview_countries.Database
                 string cityName = result.Rows[i].ItemArray[1].ToString();
                 int cityAmountOfPeople = Int32.Parse(result.Rows[i].ItemArray[2].ToString());
 
-                var city = new City(cityID, cityName, cityAmountOfPeople);
+                City city = new City(cityID, cityName, cityAmountOfPeople);
                 citiesList.Add(city);
             }
 
@@ -71,9 +69,7 @@ namespace test_08_treeview_countries.Database
             DataTable result = DBConnect.Instance.Select(cmd);
 
             if (result == null)
-            {
                 return null;
-            }
 
             var streetTypesList = new List<StreetType>();
 
@@ -82,11 +78,28 @@ namespace test_08_treeview_countries.Database
                 int streetTypeID = Int32.Parse(result.Rows[i].ItemArray[0].ToString());
                 string streetTypeName = result.Rows[i].ItemArray[1].ToString();
 
-                var streetType = new StreetType(streetTypeID, streetTypeName);
+                StreetType streetType = new StreetType(streetTypeID, streetTypeName);
                 streetTypesList.Add(streetType);
             }
 
             return streetTypesList;
         }
+
+        //public static StreetType SelectStreetTypeById(int _streetTypeID)
+        //{
+        //    MySqlCommand cmd = new MySqlCommand("SELECT street_types.ID, street_types.NAME FROM street_types WHERE street_types.ID = @ID");
+        //    cmd.Parameters.AddWithValue("@ID", _streetTypeID);
+
+        //    DataTable result = DBConnect.Instance.Select(cmd);
+
+        //    if (result == null)
+        //        return null;
+
+        //    int streetTypeID = Int32.Parse(result.Rows[0].ItemArray[0].ToString());
+        //    string streetTypeName = result.Rows[0].ItemArray[1].ToString();
+
+        //    StreetType streetType = new StreetType(streetTypeID, streetTypeName);
+        //    return streetType;
+        //}
     }
 }
