@@ -32,7 +32,7 @@ namespace test_08_treeview_countries
             Countries_tvitem = new ObservableCollection<CountryTreeViewItem>();
 
             foreach (var country in Countries)
-            {
+            {   
                 CountryTreeViewItem ctvi = new CountryTreeViewItem();
 
                 City newCity = new City();
