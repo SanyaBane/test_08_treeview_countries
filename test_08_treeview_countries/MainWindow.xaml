@@ -58,6 +58,14 @@
                     </StackPanel>
                 </HierarchicalDataTemplate>
 
+                <DataTemplate DataType="{x:Type selfModels:House}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock>
+                            <Run Text="{Binding NAME}"/>
+                        </TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+
             </TreeView.Resources>
             
         </TreeView>

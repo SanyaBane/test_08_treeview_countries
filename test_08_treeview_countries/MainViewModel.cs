@@ -39,6 +39,19 @@ namespace test_08_treeview_countries
                     {
                         Street genStreet = Street.GenerateNewRandomStreet(rand);
                         streetsForCity.Add(genStreet);
+
+                        List<House> housesForStreet = new List<House>();
+
+                        int jStart = rand.Next(1, 50);
+                        int jMaxHouses = jStart + rand.Next(6, 20);
+                        for (; jStart <= jMaxHouses; jStart++)
+                        {
+                            House house = House.GenerateNewHouse("House №" + jStart.ToString());
+
+                            housesForStreet.Add(house);
+                        }
+
+                        genStreet.HOUSES = housesForStreet;
                     }
 
                     city.STREETS = streetsForCity;
