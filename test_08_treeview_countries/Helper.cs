@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 using test_08_treeview_countries.Database;
+using test_08_treeview_countries.Database.Mappers;
 using test_08_treeview_countries.Models;
 
 namespace test_08_treeview_countries
@@ -36,7 +37,7 @@ namespace test_08_treeview_countries
         {
             Console.WriteLine("Helper.Init()");
 
-            ListOfAllStreetTypes = DB_Countries_Queries.SelectAllStreetTypes();
+            ListOfAllStreetTypes = (List<StreetType>)MapperSingleton.Instance.StreetTypeMapper.SelectAllStreetTypes();
         }
 
         public static BitmapImage LoadImage(byte[] imageData)

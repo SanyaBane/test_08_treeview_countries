@@ -69,8 +69,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Behaviours.cs" />
-    <Compile Include="Models\CountryTreeViewItem.cs" />
+    <Compile Include="Database\AbstractMapper.cs" />
+    <Compile Include="Database\DB_Constants.cs" />
+    <Compile Include="Database\Mappers\CityMapper.cs" />
+    <Compile Include="Database\Mappers\CountryMapper.cs" />
+    <Compile Include="Database\Mappers\HouseMapper.cs" />
+    <Compile Include="Database\Mappers\MapperSingleton.cs" />
+    <Compile Include="Database\Mappers\StreetMapper.cs" />
+    <Compile Include="Database\Mappers\StreetTypeMapper.cs" />
     <Compile Include="StreetTypeConverter.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -80,8 +86,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Database\DBConnect.cs" />
-    <Compile Include="Database\DB_Countries_Queries.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="MainViewModel.cs" />
     <Compile Include="MainWindow.xaml.cs">

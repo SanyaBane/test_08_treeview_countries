@@ -26,7 +26,7 @@
                                           ItemsSource="{Binding CITIES}">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock>
-                            <Image Height="16" Width="16" Source="{Binding bitmapImage}"></Image>
+                            <Image Height="16" Width="16" Source="{Binding BitmapImage}"></Image>
                             <Run Text="["/>
                             <Run Text="{Binding SHORT_NAME}"/>
                             <Run Text="] "/>

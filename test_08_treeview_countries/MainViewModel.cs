@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using test_08_treeview_countries.Database;
+using test_08_treeview_countries.Database.Mappers;
 using test_08_treeview_countries.Models;
 
 namespace test_08_treeview_countries
@@ -25,11 +26,12 @@ namespace test_08_treeview_countries
 
             // -------------
 
-            Countries = new ObservableCollection<Country>(DB_Countries_Queries.SelectAllCountries());
+            Countries = new ObservableCollection<Country>(MapperSingleton.Instance.CountryMapper.SelectAllCountries());
+            //Countries = new ObservableCollection<Country>(DB_Countries_Queries.SelectAllCountries());
 
             foreach (var country in Countries)
             {
-                List<City> citiesForCountry = DB_Countries_Queries.SelectAllCitiesByCountryID(country.ID);
+                List<City> citiesForCountry = (List<City>)MapperSingleton.Instance.CityMapper.SelectCitiesByCountryID(country.ID);
 
                 foreach (var city in citiesForCountry)
                 {

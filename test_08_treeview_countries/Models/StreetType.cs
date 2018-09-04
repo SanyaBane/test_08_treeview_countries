@@ -11,6 +11,8 @@ namespace test_08_treeview_countries.Models
         public int ID { get; set; }
         public string NAME { get; set; }
 
+        public StreetType() { }
+
         public StreetType(int id, string name)
         {
             ID = id;

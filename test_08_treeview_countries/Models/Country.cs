@@ -19,7 +19,7 @@ namespace test_08_treeview_countries.Models
         public string SHORT_NAME { get; set; }
         public object FLAG_IMAGE { get; set; }
         public List<City> CITIES { get; set; }
-        public BitmapImage bitmapImage { get; set; }
+        public BitmapImage BitmapImage { get; set; }
 
         public Country()
         {
@@ -33,12 +33,12 @@ namespace test_08_treeview_countries.Models
             SHORT_NAME = short_name;
             FLAG_IMAGE = flag_image;
 
-            if (FLAG_IMAGE is DBNull == false)
-            {
-                byte[] countryFlagImage = (byte[])FLAG_IMAGE;
+            //if (FLAG_IMAGE is DBNull == false)
+            //{
+            //    byte[] countryFlagImage = (byte[])FLAG_IMAGE;
 
-                bitmapImage = Helper.LoadImage(countryFlagImage);
-            }
+            //    BitmapImage = Helper.LoadImage(countryFlagImage);
+            //}
             
         }
 
